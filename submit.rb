@@ -25,15 +25,20 @@ class Submit
   end
 
   def result
-    operation = { 
-                  user_id: @operation[:user_id],
-                  cashback: @operation[:cashback],
-                  cashback_percent: @operation[:cashback_percent],
-                  discount: @operation[:discount],
-                  discount_percent: @operation[:discount_percent],
-                  write_off: @operation[:write_off],
-                  payment: @operation[:check_summ] - @available_for_write_off
-                } 
+    result = { 
+               status: 200,
+               message: "Данные успешно обработаны",
+               operation:{
+                           user_id: @operation[:user_id],
+                           cashback: @operation[:cashback].to_f,
+                           cashback_percent: @operation[:cashback_percent].to_f,
+                           discount: @operation[:discount].to_f,
+                           discount_percent: @operation[:discount_percent].to_f,
+                           write_off: @operation[:write_off].to_f,
+                           check_summ: (@operation[:check_summ] - @available_for_write_off).to_f
+                         }
+             }          
+                 
   end
 
 end

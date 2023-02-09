@@ -15,18 +15,16 @@ OPERATION = DB[:operation]
 
 
 post '/operation' do
-  data = JSON.parse(request.body.read)
-  item = data["item"][0]["request"]["body"]["raw"]
-  request = JSON.parse(item)
+  data = request.body.read
+  request = JSON.parse(data)
   result = Operation.new(request).products_info.result
   return json(result)
 end
 
 
 post '/submit' do
-  data = JSON.parse(request.body.read)
-  item = data["item"][1]["request"]["body"]["raw"]
-  request = JSON.parse(item)
+  data = request.body.read
+  request = JSON.parse(data)
   result = Submit.new(request).update_entries.result
   return json(result)
 end
